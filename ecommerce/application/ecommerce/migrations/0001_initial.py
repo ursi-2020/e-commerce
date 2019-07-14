@@ -25,7 +25,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('date', models.DateTimeField()),
-                ('article', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='djangoapp.Article')),
+                ('article', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='ecommerce.Article')),
             ],
         ),
     ]
