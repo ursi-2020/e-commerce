@@ -34,6 +34,8 @@ def printJson(request):
 
 # Display form
 def displayForm(request):
+    info = api.send_request("gestion-paiement", "info")
+    print(info)
     name = forms.TextInput(attrs={'size': 10, 'title': 'Your name'})
     return render(request, 'form.html')
 

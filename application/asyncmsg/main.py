@@ -6,7 +6,7 @@ import django
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "core.settings")
 django.setup()
 
-from application.djangoapp.models import *
+from application.ecommerce.models import *
 
 
 def main():
