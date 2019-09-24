@@ -10,5 +10,6 @@ urlpatterns = [
     path('search', views.search, name='search'),
     path('save', views.saveDB, name='save'),
     path('read', views.readDB, name='read'),
+    path('info', views.getInfo, name='info'),
     # path('remove', views.removeDB, name='remove')
 ]

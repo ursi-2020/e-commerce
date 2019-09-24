@@ -34,7 +34,7 @@ def printJson(request):
 
 # Display form
 def displayForm(request):
-    info = api.send_request("gestion-paiement", "info")
+    info = api.send_request("gestion-paiement", "ihm")
     print(info)
     name = forms.TextInput(attrs={'size': 10, 'title': 'Your name'})
     return render(request, 'form.html')
@@ -55,6 +55,10 @@ def saveDB(request):
 # Read from DB
 def readDB(request):
     return HttpResponse(models.Article.objects.values_list())
+
+
+def getInfo(request):
+    return HttpResponse(api.send_request("gestion-paiement", "ihm"))
 
 # Clear DB
 # def removeDB(request):
