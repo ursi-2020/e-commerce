@@ -5,6 +5,7 @@ from apipkg import api_manager as api
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django import forms
+from django.http import JsonResponse
 
 from . import models
 
@@ -38,6 +39,12 @@ def displayForm(request):
     print(info)
     name = forms.TextInput(attrs={'size': 10, 'title': 'Your name'})
     return render(request, 'form.html')
+
+def displayProducts(request):
+    if request.method == "GET":
+        products = api.send_request("catalogue-produit", "catalogueproduit/api/data")
+        print(products)
+    return JsonResponse({'data': products})
 
 # Search after validation button
 def search(request):
