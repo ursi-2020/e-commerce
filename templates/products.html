@@ -5,28 +5,52 @@
 <head>
     <meta charset="UTF-8">
     <title>E-commerce</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/products.css' %}">
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-        crossorigin="anonymous"></script>
 </head>
 
 <body>
 
-    <div class="navbar">
+    <div class="my_navbar">
+
         <div class="row">
             <div>
                 <h3 class="title">E-commerce</h3>
             </div>
 
             <div class="menu">
-                <p>Tous les produits</p>
+                <!-- <p>Tous les produits</p> -->
             </div>
         </div>
     </div>
+
+    <div>
+        <h4 style="margin-left: 3%">Liste des produits</h4>
+        <p style="margin-left: 3%">Cette page affiche les produits disponibles dans la BDD E-commerce</p>
+        
+        {% for product in data %}
+        <div class="product">
+            <p><b>Code produit:</b> {{ product.codeProduit }}</p>
+            <p><b>Famille du produit:</b> {{ product.familleProduit }}</p>
+            <p><b>Description du produit:</b> {{ product.descriptionProduit }}</p>
+            <p><b>Quantité produit:</b> {{ product.quantiteMin }}</p>
+            <p><b>Packaging:</b> {{ product.packaging }}</p>
+            <p><b>Prix:</b> {{ product.prix }}</p>
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    <form method="POST" action="/ecommerce/products" style="text-align: center">
+        {% csrf_token %}
+        <button class="validation" type="submit">Récupérer les produits</button>
+    </form>
+
+    <form method="POST" action="/ecommerce/remove" style="text-align: center">
+        {% csrf_token %}
+        <button class="validation" type="submit">Vider la BDD produits</button>
+    </form>
 
 </body>
 
