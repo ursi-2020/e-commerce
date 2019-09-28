@@ -2,9 +2,6 @@
 
 # Use case E-commerce
 
-```sequence {theme = "hand"}
-E-commerce->china: ok
-```
+## E-commerce -> Catalogue produits
 
-![Alt text](./sequence_prduits.svg)
-<img src="./sequence_prduits.svg">
+![Diagramme de séquence](./sequence_prduits.svg)
