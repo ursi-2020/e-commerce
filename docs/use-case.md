@@ -19,7 +19,7 @@ Ce dernier nous renvoie un objet JSON contenant un tableau des produits disponib
 Appel vers le catalogue:
 
 ```python
-products = api.send_request("catalogue-produit", "catalogueproduit/api/data")
+products = api.send_request("catalogue-produit", "api/data")
 data = json.loads(products)
 ```
 
@@ -53,11 +53,18 @@ for produit in data['produits']:
 
 Nous affichons ensuite le contenu de notre base de données à l'utilisateur via la route:
 ```
-    /ecommerce/products
+/ecommerce/products
 ```
 
 ![Diagramme de séquence](./usecase_produits.svg)
 
 ## E-commerce -> CRM
 
+L'application E-commerce doit pouvoir avoir l'ensemble des informations clients.
+Pour cela, il se connecte alors à l'application CRM pour récupérer toutes les informations clientes.
+
 Ce diagramme de séquence montre comment l'application E-commerce récupère l'ensemble les informations des clients à l'aide de l'application CRM.
+
+![Diagramme de séquence](./usecase_crm.svg)
+
+E-commerce demande les informations des clients auprès du CRM, à l'aide de la route que l'application met à disposition.
