@@ -1,3 +1,3 @@
-# example-app
-Hi
-it's an example app for the best project of the year
+# E-commerce app
+
+Welcome on board ! This is the repo for the E-commerce app.
