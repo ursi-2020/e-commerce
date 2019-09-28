@@ -9,4 +9,4 @@
 
 # Rôle de l'application
 
-Le rôle de l'application e-commerce est de ... dans le système d'information.
+Le rôle de l'application e-commerce est de faire l'interface entre l'utilisateur et l'ensemble des applications disponibles dans le système d'informations.

@@ -49,3 +49,10 @@ Nous affichons ensuite le contenu de notre base de données à l'utilisateur via
 ```
     /ecommerce/products
 ```
+
+![Diagramme de cas d'utilisation](./usecase_prduits.svg)
+![Diagramme de cas d'utilisation](./demo.svg)
+
+## E-commerce -> CRM
+
+Ce diagramme de séquence montre comment l'application E-commerce récupère l'ensemble les informations des clients à l'aide de l'application CRM.
