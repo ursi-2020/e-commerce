@@ -4,6 +4,8 @@
 
 ## E-commerce -> Catalogue produits
 
+### Récupérer l'ensemble des produits du Catalogue
+
 Ce diagramme de séquence montre comment l'application E-commerce récupère l'ensemble des produits disponibles dans le Catalogue Produits.
 
 ![Diagramme de séquence](./sequence_prduits.svg)
@@ -50,7 +52,7 @@ Nous affichons ensuite le contenu de notre base de données à l'utilisateur via
     /ecommerce/products
 ```
 
-![Diagramme de séquence](./demo.svg)
+![Diagramme de séquence](./usecase_produits.svg)
 
 ## E-commerce -> CRM
 
