@@ -6,6 +6,9 @@
 
 ### Récupérer l'ensemble des produits du Catalogue
 
+L'application E-commerce est en charge d'afficher les différents produits à l'utilisateur.
+Pour cela, E-commerce récupère les informations auprès du Catalogue Produits.
+
 Ce diagramme de séquence montre comment l'application E-commerce récupère l'ensemble des produits disponibles dans le Catalogue Produits.
 
 ![Diagramme de séquence](./sequence_prduits.svg)
@@ -16,8 +19,8 @@ Ce dernier nous renvoie un objet JSON contenant un tableau des produits disponib
 Appel vers le catalogue:
 
 ```python
-    products = api.send_request("catalogue-produit", "catalogueproduit/api/data")
-    data = json.loads(products)
+products = api.send_request("catalogue-produit", "catalogueproduit/api/data")
+data = json.loads(products)
 ```
 
 Ex de JSON reçu:
@@ -41,10 +44,11 @@ Ex de JSON reçu:
 Nous enregistrons ensuite dans notre BDD l'ensemble des produits reçus, à l'aide de ce code:
 
 ```python
-    for produit in data['produits']:
-        p = Produit(codeProduit=produit['codeProduit'], familleProduit=produit['familleProduit'],
-                        descriptionProduit=produit['descriptionProduit'], prix=produit['prix'], quantiteMin=1, packaging=0)
-        p.save()
+for produit in data['produits']:
+    p = Produit(codeProduit=produit['codeProduit'], familleProduit=produit['familleProduit'],
+                descriptionProduit=produit['descriptionProduit'], prix=produit['prix'],
+                quantiteMin=1, packaging=0)
+    p.save()
 ```
 
 Nous affichons ensuite le contenu de notre base de données à l'utilisateur via la route:
