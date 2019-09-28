@@ -7,7 +7,7 @@
 * [Flux](flux.md)
 * [Use Case](use-case.md)
 
-# Rôle de l'application
+# Rôle de l'application E-commerce :rocket:
 
 Le rôle de l'application e-commerce est de faire l'interface entre l'utilisateur et l'ensemble des applications disponibles dans le système d'informations.
 
