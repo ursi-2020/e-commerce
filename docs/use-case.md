@@ -51,7 +51,6 @@ Nous affichons ensuite le contenu de notre base de données à l'utilisateur via
 ```
 
 ![Diagramme de cas d'utilisation](./usecase_prduits.svg)
-![Diagramme de cas d'utilisation](./demo.svg)
 
 ## E-commerce -> CRM
 
