@@ -6,6 +6,8 @@
 
 ### Récupérer l'ensemble des produits du Catalogue
 
+![Diagramme de séquence](./usecase_produits.svg)
+
 L'application E-commerce est en charge d'afficher les différents produits à l'utilisateur.
 Pour cela, E-commerce récupère les informations auprès du Catalogue Produits.
 
@@ -55,8 +57,6 @@ Nous affichons ensuite le contenu de notre base de données à l'utilisateur via
 ```
 /ecommerce/products
 ```
-
-![Diagramme de séquence](./usecase_produits.svg)
 
 ## E-commerce -> CRM
 
