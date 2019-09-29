@@ -39,9 +39,9 @@
         </div>
     </div>
 
-    <div>
+    <div style="padding-top: 5rem">
         <div style="display: inline-block; width: 75%; padding-left: 1%">
-            <h4 style="margin-left: 3%; font-family: 'Raleway', sans-serif;"><u>Liste des produits</u></h4>
+            <h4 style="margin-left: 3%; font-family: 'Raleway', sans-serif; color: #41A1DB">Liste des produits</h4>
             <p style="margin-left: 3%; font-family: 'Raleway', sans-serif;">Cette page affiche les produits disponibles
                 dans
                 la BDD E-commerce</p>
@@ -63,12 +63,15 @@
 
         {% for product in data %}
         <div class="product">
-            <p><u>Code produit:</u> {{ product.codeProduit }}</p>
-            <p><u>Famille du produit:</u> {{ product.familleProduit }}</p>
-            <p><u>Description du produit:</u> {{ product.descriptionProduit }}</p>
-            <p><u>Quantité produit:</u> {{ product.quantiteMin }}</p>
-            <p><u>Packaging:</u> {{ product.packaging }}</p>
-            <p><u>Prix:</u> {{ product.prix }}</p>
+            <div class="picture_product"></div>
+            <div>
+                <p><span style="color: gray">Famille produit<br></span> {{ product.familleProduit }}</p>
+                <!-- <p><u>Description du produit:</u> {{ product.descriptionProduit }}</p>
+                <p><u>Quantité produit:</u> {{ product.quantiteMin }}</p>
+                <p><u>Packaging:</u> {{ product.packaging }}</p> -->
+                <p><span style="color: gray">Prix<br></span> {{ product.prix }}</p>
+                <p><span style="color: gray">Code produit<br></span> {{ product.codeProduit }}</p>
+            </div>
         </div>
 
         {% endfor %}

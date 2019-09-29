@@ -10,6 +10,8 @@ urlpatterns = [
     path('add', views.addProducts, name="add"),
 
     path('customers', views.displayCustomers, name="customers"),
+    path('load_customers', views.loadCustomers, name="load_customers"),
+    path('remove_customers', views.removeCustomers, name="remove_customers"),
 
     path('scheduler', views.displayScheduler, name="scheduler")    
 ]

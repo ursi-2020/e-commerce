@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <title>E-commerce</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/products.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/customers.css' %}">
     <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
 
 </head>
@@ -39,7 +39,7 @@
         </div>
     </div>
 
-    <div>
+    <div style="padding-top: 5rem;">
         <div style="display: inline-block; width: 75%; padding-left: 1%">
             <h4 style="margin-left: 3%; font-family: 'Raleway', sans-serif;"><u>Liste des clients</u></h4>
             <p style="margin-left: 3%; font-family: 'Raleway', sans-serif;">Cette page affiche les clients issus
@@ -49,26 +49,26 @@
 
 
         <div style="display: inline-block">
-            <form method="POST" action="/ecommerce/add" style="text-align: center; display: inline-block;">
+            <form method="POST" action="/ecommerce/load_customers" style="text-align: center; display: inline-block;">
                 {% csrf_token %}
                 <button class="validation" type="submit">Récupérer les clients</button>
             </form>
 
-            <form method="POST" action="/ecommerce/remove" style="text-align: center; display: inline-block;">
+            <form method="POST" action="/ecommerce/remove_customers" style="text-align: center; display: inline-block;">
                 {% csrf_token %}
                 <button class="validation" type="submit">Vider la BDD clients</button>
             </form>
         </div>
         <br>
 
-        {% for product in data %}
-        <div class="product">
-            <p><u>Code produit:</u> {{ product.codeProduit }}</p>
-            <p><u>Famille du produit:</u> {{ product.familleProduit }}</p>
-            <p><u>Description du produit:</u> {{ product.descriptionProduit }}</p>
-            <p><u>Quantité produit:</u> {{ product.quantiteMin }}</p>
-            <p><u>Packaging:</u> {{ product.packaging }}</p>
-            <p><u>Prix:</u> {{ product.prix }}</p>
+        {% for customer in data %}
+        <div class="customer">
+            <div class="picture"></div>
+            <div>
+                <p><span style="color: gray">Prénom<br></span> {{ customer.firstName }}</p>
+                <p><span style="color: gray">Nom de famille<br></span> {{ customer.lastName }}</p>
+                <p><span style="color: gray">Points de fidélité<br></span> {{ customer.fidelityPoint }}</p>
+            </div>
         </div>
 
         {% endfor %}

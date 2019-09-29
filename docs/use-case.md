@@ -43,7 +43,7 @@ Ex de JSON reçu:
 }
 ```
 
-### Enregistrement des données
+### Enregistrement des données produits
 
 Une fois le JSON reçu, nous enregistrons dans notre BDD l'ensemble des produits, à l'aide de ce code:
 
@@ -87,11 +87,60 @@ Ce diagramme de séquence montre comment l'application E-commerce récupère l'e
 ![Diagramme de séquence](./sequence_crm.svg)
 
 E-commerce demande les informations des clients auprès du CRM, à l'aide de la route que l'application met à disposition.
+Ce bout de code permet de réupérer les informations:
+
+```python
+customers = api.send_request("crm", "api/data")
+data = json.loads(customers)
+```
 
 ### Enregistrer les clients dans la BDD E-commerce
 
 Une fois les clients récupérés, nous les enregistrons dans notre base de données en tant que Customer.
 
+```python
+for customer in data:
+    customer_tmp = Customer(firstName=customer['firstName'],               lastName=customer['lastName'],                               
+        fidelityPoint=customer['fidelityPoint'], payment=customer  ['payment'], account=customer["account"])
+    customer_tmp.save()
+```
+
+### Affichage de la base de donnnées
+
+A tout moment, il est possible de visualiser le contenu de la base de données clients de l'application E-commerce.
+Le code suivant permet de récupérer les informations clients sauvegardés dans la BDD E-commerce:
+
+```python
+customer_list = {
+    "data" : Customer.objects.all()
+}
+return render(request, "customers.html", customer_list)
+```
+
+Le template HTML utilisé pour afficher les cards:
+
+```html
+{% for customer in data %}
+    <div class="customer">
+        <div class="picture"></div>
+        <div>
+            <p><span style="color: gray">Prénom<br></span> {{ customer.firstName }}</p>
+            <p><span style="color: gray">Nom de famille<br></span> {{ customer.lastName }}</p>
+            <p><span style="color: gray">Points de fidélité<br></span> {{ customer.fidelityPoint }}</p>
+        </div>
+    </div>
+{% endfor %}
+```
+
 ### Effacer la base de données clients
 
-Il est possible de vider la base de données clients à l'aide d'un bouton.
+Il est possible de vider la base de données clients de l'app E-commerce à l'aide d'un bouton.
+Le code suivant est alors déclenché:
+
+```python
+models.Customer.objects.all().delete()
+customers_list = {
+    "data" : Customer.objects.all()
+}
+return render(request, "customers.html", customers_list)
+```
