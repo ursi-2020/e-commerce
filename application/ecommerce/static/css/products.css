@@ -11,10 +11,11 @@ body {
 
 h3 {
   margin: 0;
-  font-family: "locator";
+  font-family: "Raleway", sans-serif;
   margin-left: 3%;
   font-size: 30px;
   padding-top: calc(2.5rem - 20px);
+  color: #41A1DB;
 }
 
 .my_container {
@@ -26,27 +27,48 @@ h3 {
   margin-top: calc(((100vh - 5rem) / 2) - 15rem);
   box-shadow: 0 4px 16px 0 rgba(50, 56, 63, 0.08);
   border-radius: 15px;
-}
-
-.fields {
-  width: 50%;
-  height: 2rem;
-  border-radius: 5px;
-  margin-top: 3%;
+  font-family: "Raleway", sans-serif;
 }
 
 .validation {
-  width: 30%;
+  width: 10rem;
   height: 2rem;
   margin-top: 4%;
+  font-family: 'Raleway', sans-serif;
+  border: none;
+  background: white;
+  border-radius: 30px;
+  color: #41A1DB;
+  border: thin solid #41A1DB;
+}
+.validation:hover {
+  color: white;
+  background-color: #41A1DB;
+  border: thin solid #41A1DB;
+}
+
+.item_menu {
+  width: 10rem;
+  height: 2rem;
+  margin-top: 4%;
+  font-family: 'Raleway', sans-serif;
+  border: none;
+  background: white;
+  border-radius: 30px;
+  color: #41A1DB;
+}
+.item_menu:hover {
+  background-color: rgba(65, 160, 219, 0.1);
 }
 
 .product {
-    background: white;
-    width: 20%;
-    border-radius: 15px;
-    margin-top: 3%;
-    margin-left: 3%;
-    box-shadow: 0 18px 22px 0 rgba(121, 133, 148, 0.16);
-    padding: 1% !important;
+  display: inline-block;
+  background: white;
+  width: 19%;
+  border-radius: 15px;
+  margin-top: 3%;
+  margin-left: 3%;
+  box-shadow: 0 18px 22px 0 rgba(121, 133, 148, 0.16);
+  padding: 1% !important;
+  font-family: "Raleway", sans-serif;
 }

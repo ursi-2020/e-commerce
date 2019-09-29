@@ -11,32 +11,47 @@ body {
 
 h3 {
   margin: 0;
-  font-family: "locator";
   margin-left: 3%;
   font-size: 30px;
   padding-top: calc(2.5rem - 20px);
+  font-family: "Raleway", sans-serif;
+  color: #41A1DB;
 }
 
 .my_container {
-    width: 40%;
-    height: 30rem;
-    background-color: #FFFFFF;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: calc(((100vh - 5rem) / 2) - 15rem);
-    box-shadow: 0 4px 16px 0 rgba(50, 56, 63, 0.08);
-    border-radius: 15px;
+  width: 40%;
+  height: 30rem;
+  background-color: #ffffff;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: calc(((100vh - 5rem) / 2) - 20rem);
+  box-shadow: 0 4px 16px 0 rgba(50, 56, 63, 0.08);
+  border-radius: 15px;
+  font-family: "Raleway", sans-serif;
+  padding-top: 5rem;
 }
 
 .fields {
-    width: 50%;
-    height: 2rem;
-    border-radius: 5px;
-    margin-top: 3%;
+  width: 50%;
+  height: 2rem;
+  border-radius: 5px;
+  margin-top: 3%;
+  font-family: "Raleway", sans-serif;
+  border: thin solid #80808045;
+  padding: 15px;
 }
 
 .validation {
-    width: 30%;
-    height: 2rem;
-    margin-top: 4%;
+  width: 30%;
+  height: 3rem;
+  margin-top: 4%;
+  border: none;
+  background: #41A1DB;
+  border-radius: 30px;
+  color: white;
+  font-family: "Raleway", sans-serif;
+}
+
+.validation:hover {
+  background-color: #41a1dba6;
 }

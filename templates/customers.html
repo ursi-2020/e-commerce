@@ -41,9 +41,9 @@
 
     <div>
         <div style="display: inline-block; width: 75%; padding-left: 1%">
-            <h4 style="margin-left: 3%; font-family: 'Raleway', sans-serif;"><u>Liste des produits</u></h4>
-            <p style="margin-left: 3%; font-family: 'Raleway', sans-serif;">Cette page affiche les produits disponibles
-                dans
+            <h4 style="margin-left: 3%; font-family: 'Raleway', sans-serif;"><u>Liste des clients</u></h4>
+            <p style="margin-left: 3%; font-family: 'Raleway', sans-serif;">Cette page affiche les clients issus
+                de
                 la BDD E-commerce</p>
         </div>
 
@@ -51,12 +51,12 @@
         <div style="display: inline-block">
             <form method="POST" action="/ecommerce/add" style="text-align: center; display: inline-block;">
                 {% csrf_token %}
-                <button class="validation" type="submit">Récupérer les produits</button>
+                <button class="validation" type="submit">Récupérer les clients</button>
             </form>
 
             <form method="POST" action="/ecommerce/remove" style="text-align: center; display: inline-block;">
                 {% csrf_token %}
-                <button class="validation" type="submit">Vider la BDD produits</button>
+                <button class="validation" type="submit">Vider la BDD clients</button>
             </form>
         </div>
         <br>

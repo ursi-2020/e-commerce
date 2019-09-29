@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <title>E-commerce</title>
     <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
 
 </head>
 
@@ -17,12 +18,14 @@
 
     <div class="my_container">
         <h3 class="title" style="text-align: center"> Inscription</h3>
-        <form method="POST" action="/ecommerce/connect" style="margin-top: 5rem; margin-left: 3%; text-align: center">
+        <p style="color: gray; text-align: center">Créer un compte pour accéder au site</p>
+        <form method="POST" action="/ecommerce/connect" style="margin-top: 2rem; margin-left: 3%; text-align: center">
             {% csrf_token %}
             <input class="fields" type="text" name="username" placeholder="Nom d'utilisateur"><br>
-            <input class="fields" type="text" name="password" placeholder="Mot de passe"><br>
+            <input class="fields" type="password" name="password" placeholder="Mot de passe"><br>
 
             <button class="validation" type="submit">S'inscrire</button>
+            <p><u style="color: gray; font-family: 'Raleway'">Je possède déjà un compte</u></p>
         </form>
     </div>
 

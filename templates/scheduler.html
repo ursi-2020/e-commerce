@@ -30,7 +30,7 @@
                     <button class="item_menu" type="submit">Clients</button>
                 </form>
                 <span style="color: gray">|</span>
-                <form method="POST" action="/ecommerce/scheduler" style="text-align: center; display: inline-block;">
+                <form method="POST" action="/ecommerce/customers" style="text-align: center; display: inline-block;">
                     {% csrf_token %}
                     <button class="item_menu" type="submit">Scheduler</button>
                 </form>
@@ -41,37 +41,13 @@
 
     <div>
         <div style="display: inline-block; width: 75%; padding-left: 1%">
-            <h4 style="margin-left: 3%; font-family: 'Raleway', sans-serif;"><u>Liste des produits</u></h4>
-            <p style="margin-left: 3%; font-family: 'Raleway', sans-serif;">Cette page affiche les produits disponibles
-                dans
-                la BDD E-commerce</p>
+            <h4 style="margin-left: 3%; font-family: 'Raleway', sans-serif;"><u>Scheduler</u></h4>
+            <p style="margin-left: 3%; font-family: 'Raleway', sans-serif;">Cette page affiche les différents
+                possibilités offertes par le scheduler</p>
         </div>
 
 
-        <div style="display: inline-block">
-            <form method="POST" action="/ecommerce/add" style="text-align: center; display: inline-block;">
-                {% csrf_token %}
-                <button class="validation" type="submit">Récupérer les produits</button>
-            </form>
-
-            <form method="POST" action="/ecommerce/remove" style="text-align: center; display: inline-block;">
-                {% csrf_token %}
-                <button class="validation" type="submit">Vider la BDD produits</button>
-            </form>
-        </div>
         <br>
-
-        {% for product in data %}
-        <div class="product">
-            <p><u>Code produit:</u> {{ product.codeProduit }}</p>
-            <p><u>Famille du produit:</u> {{ product.familleProduit }}</p>
-            <p><u>Description du produit:</u> {{ product.descriptionProduit }}</p>
-            <p><u>Quantité produit:</u> {{ product.quantiteMin }}</p>
-            <p><u>Packaging:</u> {{ product.packaging }}</p>
-            <p><u>Prix:</u> {{ product.prix }}</p>
-        </div>
-
-        {% endfor %}
 
     </div>
 
