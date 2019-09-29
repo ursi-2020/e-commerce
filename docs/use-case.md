@@ -154,6 +154,10 @@ L'application E-commerce met en place le système de scheduler.
 Le scheduler permet de programmer différentes tâches à effectuer, à une heure précise.
 Il existe deux tâches programmables à l'heure actuelle: récupérer les données clients, et récupérer les données du catalogue produit.
 
+
+![Diagramme de séquence](./usecase_scheduler.svg)
+
+
 ### Récupération des informations du scheduler
 
 La page du scheduler affiche à tout moment la date et l'heure actuel de la clock.
