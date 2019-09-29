@@ -119,7 +119,7 @@ return render(request, "customers.html", customer_list)
 
 Le template HTML utilisé pour afficher les cards:
 
-```html
+```
 {% for customer in data %}
     <div class="customer">
         <div class="picture"></div>
@@ -172,4 +172,30 @@ info = {
     "tasks" : tasks
 }
 return render(request, "scheduler.html", info)
+```
+
+### Ajouter une tâche au scheduler
+
+Pour pouvoir ajouter une tâche au scheduler, nous avons créé un formulaire dédié.
+Il suffit d'indiquer l'application dont on souhaite récupérer les données, indiquer une date et une heure ainsi qu'une récurence.
+La tâche est alors enregistrée puis executée à l'heure indiquée.
+
+```python
+data = request.POST.dict()
+time = datetime.strptime(data["time"], '%Y-%m-%dT%H:%M')
+host = ""
+recurrence = data["recurrence"]
+url = ""
+source = "e-commerce"
+name = "get_customers"
+data2 = ""
+if data["app"] == "products":
+    host = "e-commerce"
+    url = "ecommerce/add-auto"
+    name = "get_products"
+elif data["app"] == "crm":
+    host = "e-commerce"
+    url = "ecommerce/auto_load_customers"
+    name = "get_customers"
+schedule_task(host, url, time, recurrence, data2, source, name)
 ```

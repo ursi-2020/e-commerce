@@ -203,4 +203,12 @@ def schedule_task(host, url, time, recurrence, data, source, name):
     print(r.text)
     return r.text
 
+
+# Remove all tasks from scheduler
+@csrf_exempt
+def removeAllTasks(request):
+    remove = api.post_request("scheduler", "app/delete?source=ecommerce", '{source: "ecommerce"}')
+    print(remove)
+    return HttpResponse("done")
+
 ############################################################ END SCHEDULER ###########################################################

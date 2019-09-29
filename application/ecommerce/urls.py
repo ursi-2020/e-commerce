@@ -16,5 +16,6 @@ urlpatterns = [
     path('remove_customers', views.removeCustomers, name="remove_customers"),
 
     path('scheduler', views.displayScheduler, name="scheduler"),
-    path('add_task', views.addTaskScheduler, name="add_task")
+    path('add_task', views.addTaskScheduler, name="add_task"),
+    path('remove_tasks', views.removeAllTasks, name="remove_tasks")
 ]
