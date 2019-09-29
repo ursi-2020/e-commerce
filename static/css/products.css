@@ -3,6 +3,8 @@ body {
 }
 
 .my_navbar {
+  position: fixed;
+  z-index: 999;
   height: 5rem;
   width: 100%;
   background-color: #ffffff;
@@ -71,4 +73,17 @@ h3 {
   box-shadow: 0 18px 22px 0 rgba(121, 133, 148, 0.16);
   padding: 1% !important;
   font-family: "Raleway", sans-serif;
+}
+
+.product:hover {
+  transform: scale(1.1);
+  box-shadow: 0 18px 22px 0 rgba(121, 133, 148, 0.35);
+}
+
+.picture_product {
+  height: 20rem;
+  background-position: center;
+  background-size: cover;
+  background-image: url("../img/product_placeholder.jpg");
+  border-radius: 15px;
 }

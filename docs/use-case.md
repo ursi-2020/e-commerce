@@ -144,3 +144,32 @@ customers_list = {
 }
 return render(request, "customers.html", customers_list)
 ```
+
+
+## Scheduler
+
+### Principe
+
+L'application E-commerce met en place le système de scheduler.
+Le scheduler permet de programmer différentes tâches à effectuer, à une heure précise.
+Il existe deux tâches programmables à l'heure actuelle: récupérer les données clients, et récupérer les données du catalogue produit.
+
+### Récupération des informations du scheduler
+
+La page du scheduler affiche à tout moment la date et l'heure actuel de la clock.
+Il indique également la vitesse de celle-ci.
+
+Nous récupérons également l'ensemble des tâches programmées par le scheduler, afin de les afficher dans un tableau.
+
+Pour cela, nous utilisons le code suivant:
+
+```python
+info = api.send_request("scheduler", "clock/info")
+tasks = api.send_request("scheduler", "schedule/list")
+info = json.loads(info)
+info = {
+    "data" : info,
+    "tasks" : tasks
+}
+return render(request, "scheduler.html", info)
+```

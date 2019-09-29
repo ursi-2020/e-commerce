@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <title>E-commerce</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/products.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/scheduler.css' %}">
     <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
 
 </head>
@@ -39,11 +39,62 @@
         </div>
     </div>
 
-    <div>
-        <div style="display: inline-block; width: 75%; padding-left: 1%">
-            <h4 style="margin-left: 3%; font-family: 'Raleway', sans-serif;"><u>Scheduler</u></h4>
+    <div style="padding-top: 5rem;">
+        <div style="width: 75%; padding-left: 1%">
+            <h4 style="margin-left: 3%; font-family: 'Raleway', sans-serif; color: #41A1DB">Scheduler</h4>
             <p style="margin-left: 3%; font-family: 'Raleway', sans-serif;">Cette page affiche les différents
                 possibilités offertes par le scheduler</p>
+        </div>
+
+        <div style="display: inline-block; margin-left: 3%">
+            <div class="info">
+                <h4 style="margin-left: 3.5%; color: #41A1DB">Scheduler</h4>
+                <p style="margin-left: 3.5%; font-family: 'Raleway'">Le scheduler permet de programmer des tâches</p>
+            </div>
+            <div class="info" style="margin-top: 2rem">
+                <h4 style="margin-left: 3.5%;color: #41A1DB">Informations</h4>
+                <p style="margin-left: 3.5%; font-family: 'Raleway'">L'heure de la clock est {{ data.0 }}</p>
+                <p style="margin-left: 3.5%; font-family: 'Raleway'">Sa vitesse actulle est de {{ data.1 }}</p>
+            </div>
+            <div class="info" style="margin-top: 2rem">
+                <h4 style="margin-left: 3.5%;color: #41A1DB">Commandes</h4>
+                <p style="margin-left: 3.5%; font-family: 'Raleway'">L'heure de la clock est {{ data.0 }}</p>
+                <p style="margin-left: 3.5%; font-family: 'Raleway'">Sa vitesse actulle est de {{ data.1 }}</p>
+            </div>
+        </div>
+
+        <div class="task">
+            <h4 style="color: #41A1DB; margin-bottom: 0">Ajouter une tâche au Scheduler</h4>
+            <p style="margin-top: 0; color:gray">Charger les données à une heure spécifique</p>
+            <form method="POST" action="/ecommerce/add_task" style="text-align: center;">
+                {% csrf_token %}
+
+                <select name="app" id="app" class="fields" style="height: 4rem; width: 53%">
+                    <option value="">--Choisissez une application--</option>
+                    <option value="crm">CRM</option>
+                    <option value="products">Catalogue produits</option>
+                </select><br>
+                <input class="fields" type="datetime-local" id="time" name="time"><br>
+                <select name="recurrence" id="pet-select" class="fields" style="height: 4rem; width: 53%">
+                    <option value="">--Choisissez une récurence--</option>
+                    <option value="none">Aucune</option>
+                    <option value="minute">Toutes les minutes</option>
+                    <option value="hour">Toutes les heures</option>
+                    <option value="day">Tous les jours</option>
+                    <option value="week">Toutes les semaines</option>
+                    <option value="month">Tous les mois</option>
+                    <option value="year">Tous les ans</option>
+                </select><br>
+                <button class="validation" type="submit">Ajouter une tâche</button>
+            </form>
+        </div>
+
+        <div class="tasks_list">
+            <h4 style="color: #41A1DB">Listes des tâches programmées</h4>
+
+
+{{ tasks |safe }}
+
         </div>
 
 
