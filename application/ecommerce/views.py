@@ -38,7 +38,7 @@ def displayProducts(request):
 # Call Catalogue produits to get content of its DB
 # Returns products' view with content of E-commerce DB
 def addProducts(request):
-    products = api.send_request("catalogue-produit", "api/data")
+    products = api.send_request("catalogue-produit", "api/get-ecommerce")
     data = json.loads(products)
     for produit in data['produits']:
         p = Produit(codeProduit=produit['codeProduit'], familleProduit=produit['familleProduit'],
@@ -54,7 +54,7 @@ def addProducts(request):
 @csrf_exempt
 def addProductsAuto(request):
     print("Added automatically products")
-    products = api.send_request("catalogue-produit", "api/data")
+    products = api.send_request("catalogue-produit", "api/get-ecommerce")
     data = json.loads(products)
     for produit in data['produits']:
         p = Produit(codeProduit=produit['codeProduit'], familleProduit=produit['familleProduit'],

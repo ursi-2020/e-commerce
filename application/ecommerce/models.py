@@ -33,3 +33,11 @@ class Customer(models.Model):
     fidelityPoint = models.IntegerField(default=0)
     payment = models.IntegerField(default=0)
     account = models.CharField(max_length=10, default="")
+
+class Promotion(models.Model):
+    codeProduit = models.CharField(max_length=200)
+    familleProduit = models.CharField(max_length=200)
+    descriptionProduit = models.CharField(max_length=200)
+    quantiteMin = models.PositiveIntegerField()
+    packaging = models.PositiveIntegerField()
+    prix = models.PositiveIntegerField()
