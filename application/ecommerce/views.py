@@ -111,8 +111,8 @@ def loadCustomers(request):
     customers = api.send_request("crm", "api/data")
     data = json.loads(customers)
     for customer in data:
-        customer_tmp = Customer(idClient=customer['idClient'], prenom=customer['prenom'],
-                        nom=customer['nom'], credit=customer['credit'], paiement=customer["paiement"], compte=customer["compte"], carteFid=customer["carteFid"])
+        customer_tmp = Customer(idClient=customer['IdClient'], prenom=customer['Prenom'],
+                        nom=customer['Nom'], credit=customer['Credit'], paiement=customer["Paiement"], compte=customer["Compte"], carteFid=customer["carteFid"])
         customer_tmp.save()
     customers_list = {
         "data" : Customer.objects.all()
