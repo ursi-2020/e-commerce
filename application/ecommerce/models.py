@@ -28,11 +28,13 @@ class Vente(models.Model):
         return 'Vente: {} - {}'.format(self.article.nom, self.date)
 
 class Customer(models.Model):
-    firstName = models.CharField(max_length=200)
-    lastName = models.CharField(max_length=200)
-    fidelityPoint = models.IntegerField(default=0)
-    payment = models.IntegerField(default=0)
-    account = models.CharField(max_length=10, default="")
+    idClient = models.CharField(max_length=200)
+    prenom = models.CharField(max_length=200)
+    nom = models.CharField(max_length=200)
+    credit = models.CharField(max_length=200)
+    paiement = models.IntegerField(default=0)
+    compte = models.CharField(max_length=200)
+    carteFid = models.IntegerField(default=0)
 
 class Promotion(models.Model):
     codeProduit = models.CharField(max_length=200)
