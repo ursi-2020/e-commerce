@@ -42,7 +42,7 @@ def addProducts(request):
     data = json.loads(products)
     for produit in data['produits']:
         p = Produit(codeProduit=produit['codeProduit'], familleProduit=produit['familleProduit'],
-                        descriptionProduit=produit['descriptionProduit'], prix=produit['prix'], quantiteMin=1, packaging=0)
+                        descriptionProduit=produit['descriptionProduit'], prix=produit['prix'], quantiteMin=1, packaging=0, exclusivite=produit['exclusivite'])
         p.save()
     product_list = {
         "data" : Produit.objects.all()
@@ -111,8 +111,8 @@ def loadCustomers(request):
     customers = api.send_request("crm", "api/data")
     data = json.loads(customers)
     for customer in data:
-        customer_tmp = Customer(idClient=customer['IdClient'], prenom=customer['Prenom'],
-                        nom=customer['Nom'], credit=customer['Credit'], paiement=customer["Paiement"], compte=customer["Compte"], carteFid=customer["carteFid"])
+        customer_tmp = Customer(IdClient=customer['IdClient'], Prenom=customer['Prenom'],
+                        Nom=customer['Nom'], Credit=customer['Credit'], Paiement=customer["Paiement"], Compte=customer["Compte"], carteFid=customer["carteFid"])
         customer_tmp.save()
     customers_list = {
         "data" : Customer.objects.all()
