@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <title>E-commerce</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/products.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/product.css' %}">
     <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
 
 </head>
@@ -39,8 +39,23 @@
         </div>
     </div>
 
-
-    <div class="picture_product"></div>
+    <div class="my_row">
+        <div class="left_container">
+            <div class="picture_product"></div>
+        </div>
+        <div class="right_container">
+            <h3>Description</h3>
+            <p>{{ product.descriptionProduit }}</p>
+            <br>
+            <p><u>Informations</u></p>
+            <p>Code produit: {{ product.codeProduit }}</p>
+            <p>Famille produit: {{ product.familleProduit }}</p>
+            <p>Quantité minimum: {{ product.quantiteMin }}</p>
+            <p>Packaging: {{ product.packaging }}</p>
+            <p>Prix: {{ product.prix }}</p>
+            <p>Exclusivite: {{ product.exclusivite }}</p>
+        </div>
+    </div>
 
 </body>
 

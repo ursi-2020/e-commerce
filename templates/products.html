@@ -41,7 +41,7 @@
 
     <div style="padding-top: 5rem">
         <div style="display: inline-block; width: 75%; padding-left: 1%">
-            <h4 style="margin-left: 3%; font-family: 'Raleway', sans-serif; color: #41A1DB">Liste des produits</h4>
+            <h4 style="margin-left: 3%; font-family: 'Raleway', sans-serif; color: #41A1DB">Page des produits</h4>
             <p style="margin-left: 3%; font-family: 'Raleway', sans-serif;">Cette page affiche les produits disponibles
                 dans
                 la BDD E-commerce, ainsi que les promotions</p>
@@ -83,7 +83,7 @@
                     <p style="color: white"><span>x</span></p>
                 {% endif %}
                 <div class="details_banner">
-                    <a  class="details_link" href="product">Voir le produit</a>
+                    <a  class="details_link" href="{% url 'go-product' pk=promo.id %}">Voir le produit</a>
                 </div>
             </div>
         </div>
@@ -110,7 +110,7 @@
                     <p style="color: white"><span>x</span></p>
                 {% endif %}
                 <div class="details_banner">
-                    <a  class="details_link" href="product">Voir le produit</a>
+                    <a  class="details_link" href="{% url 'go-product' pk=product.id_catalogue %}">Voir le produit</a>
                 </div>
             </div>
         </div>

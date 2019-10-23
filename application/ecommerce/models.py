@@ -2,6 +2,7 @@ from django.db import models
 
 
 class Produit(models.Model):
+    id_catalogue = models.PositiveIntegerField()
     codeProduit = models.CharField(max_length=200)
     familleProduit = models.CharField(max_length=200)
     descriptionProduit = models.CharField(max_length=200)

@@ -30,9 +30,16 @@ def index(request):
 # Display products from E-commerce DB
 # Returns the products' view
 def displayProducts(request):
+    all_producsts = Produit.objects.all()
+    for product in all_producsts:
+        product.prix = product.prix / 100
+    all_promotions = Promotion.objects.all()
+    for promo in all_promotions:
+        promo.prix = promo.prix / 100
+        promo.prixOriginel = promo.prixOriginel / 100
     product_list = {
-        "data" : Produit.objects.all(),
-        "promos" : Promotion.objects.all()
+        "data" : all_producsts,
+        "promos" : all_promotions
     }
     return render(request, "products.html", product_list)
 
@@ -44,7 +51,7 @@ def addProducts(request):
     data = json.loads(products)
     for produit in data['produits']:
         p = Produit(codeProduit=produit['codeProduit'], familleProduit=produit['familleProduit'],
-                        descriptionProduit=produit['descriptionProduit'], prix=produit['prix'], quantiteMin=1, packaging=0, exclusivite=produit['exclusivite'])
+                        descriptionProduit=produit['descriptionProduit'], prix=produit['prix'], quantiteMin=1, packaging=0, exclusivite=produit['exclusivite'], id_catalogue=produit['id'])
         p.save()
     promotions = api.send_request("gestion-promotion", "promo/ecommerce")
     data2 = json.loads(promotions)
@@ -55,9 +62,16 @@ def addProducts(request):
         p2.save()
 
 
+    all_producsts = Produit.objects.all()
+    for product in all_producsts:
+        product.prix = product.prix / 100
+    all_promotions = Promotion.objects.all()
+    for promo in all_promotions:
+        promo.prix = promo.prix / 100
+        promo.prixOriginel = promo.prixOriginel / 100
     product_list = {
-        "data" : Produit.objects.all(),
-        "promos" : Promotion.objects.all()
+        "data" : all_producsts,
+        "promos" : all_promotions
     }
     return render(request, "products.html", product_list)
 
@@ -70,8 +84,18 @@ def addProductsAuto(request):
     data = json.loads(products)
     for produit in data['produits']:
         p = Produit(codeProduit=produit['codeProduit'], familleProduit=produit['familleProduit'],
-                        descriptionProduit=produit['descriptionProduit'], prix=produit['prix'], quantiteMin=1, packaging=0)
+                        descriptionProduit=produit['descriptionProduit'], prix=produit['prix'], quantiteMin=1, packaging=0, exclusivite=produit['exclusivite'], id_catalogue=produit['id'])
         p.save()
+
+    
+    promotions = api.send_request("gestion-promotion", "promo/ecommerce")
+    data2 = json.loads(promotions)
+    data2 = json.loads(data2)
+    for promo in data2:
+        p2 = Promotion(codeProduit=promo['fields']['codeProduit'], familleProduit=promo['fields']['familleProduit'],
+                        descriptionProduit=promo['fields']['descriptionProduit'], prix=promo['fields']['prix'], quantiteMin=promo['fields']['quantiteMin'], packaging=promo['fields']['packaging'], prixOriginel=promo['fields']['prixOriginel'], reduction=promo['fields']['reduction'])
+        p2.save()
+
     return HttpResponse("Done")
 
 
@@ -86,8 +110,16 @@ def removeDB(request):
     }
     return render(request, "products.html", product_list)
 
-def goToProduct(request):
-    return render(request, "product.html")
+def goToProduct(request, pk):
+    product = api.send_request("catalogue-produit", "api/get-by-id/" + str(pk))
+    result = json.loads(product)
+    result = result['produit']
+    produit = Produit(codeProduit=result['codeProduit'], familleProduit=result['familleProduit'],
+                        descriptionProduit=result['descriptionProduit'], prix=result['prix'], quantiteMin=1, packaging=0, id_catalogue=result['id'])
+    data = {
+        "product": produit
+    }
+    return render(request, "product.html", data)
 
 
 ############################################################ END PRODUCTS ############################################################
@@ -108,9 +140,16 @@ def connect(request):
     }
     body = json.dumps(body)
     signup = api.post_request("crm", "/api/update_db", body)
+    all_producsts = Produit.objects.all()
+    for product in all_producsts:
+        product.prix = product.prix / 100
+    all_promotions = Promotion.objects.all()
+    for promo in all_promotions:
+        promo.prix = promo.prix / 100
+        promo.prixOriginel = promo.prixOriginel / 100
     product_list = {
-        "data" : Produit.objects.all(),
-        "promos" : Promotion.objects.all()
+        "data" : all_producsts,
+        "promos" : all_promotions
     }
     return render(request, 'products.html', product_list)
 

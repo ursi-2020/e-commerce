@@ -1,0 +1,60 @@
+body {
+  margin: 0;
+}
+
+.my_navbar {
+  position: fixed;
+  z-index: 999;
+  height: 5rem;
+  width: 100%;
+  background-color: #ffffff;
+  box-shadow: 0 4px 16px 0 rgba(50, 56, 63, 0.08);
+}
+
+h3 {
+  margin: 0;
+  font-family: "Raleway", sans-serif;
+  margin-left: 3%;
+  font-size: 30px;
+  padding-top: calc(2.5rem - 20px);
+  color: #41a1db;
+}
+
+.item_menu {
+  width: 10rem;
+  height: 2rem;
+  margin-top: 4%;
+  font-family: "Raleway", sans-serif;
+  border: none;
+  background: white;
+  border-radius: 30px;
+  color: #41a1db;
+}
+.item_menu:hover {
+  background-color: rgba(65, 160, 219, 0.1);
+}
+
+.picture_product {
+  height: 20rem;
+  background-position: center;
+  background-size: cover;
+  background-image: url("../img/product_placeholder.jpg");
+  border-radius: 15px;
+}
+
+.my_row {
+    padding-top: 5rem;
+    height: calc(100vh - 5rem);
+}
+
+.left_container {
+    display: inline-block;
+    width: 50%;
+    padding-top: calc((100vh - 5rem)/2 - (10rem));
+}
+
+.right_container {
+    display: inline-block;
+    width: 49%;
+}
+
