@@ -8,6 +8,7 @@ from django import forms
 from django.http import JsonResponse
 from .models import Produit
 from .models import Customer
+from .models import Promotion
 from . import models
 from datetime import datetime, timedelta
 
@@ -30,7 +31,8 @@ def index(request):
 # Returns the products' view
 def displayProducts(request):
     product_list = {
-        "data" : Produit.objects.all()
+        "data" : Produit.objects.all(),
+        "promos" : Promotion.objects.all()
     }
     return render(request, "products.html", product_list)
 
@@ -44,8 +46,18 @@ def addProducts(request):
         p = Produit(codeProduit=produit['codeProduit'], familleProduit=produit['familleProduit'],
                         descriptionProduit=produit['descriptionProduit'], prix=produit['prix'], quantiteMin=1, packaging=0, exclusivite=produit['exclusivite'])
         p.save()
+    promotions = api.send_request("gestion-promotion", "promo/ecommerce")
+    data2 = json.loads(promotions)
+    data2 = json.loads(data2)
+    for promo in data2:
+        p2 = Promotion(codeProduit=promo['fields']['codeProduit'], familleProduit=promo['fields']['familleProduit'],
+                        descriptionProduit=promo['fields']['descriptionProduit'], prix=promo['fields']['prix'], quantiteMin=promo['fields']['quantiteMin'], packaging=promo['fields']['packaging'], prixOriginel=promo['fields']['prixOriginel'], reduction=promo['fields']['reduction'])
+        p2.save()
+
+
     product_list = {
-        "data" : Produit.objects.all()
+        "data" : Produit.objects.all(),
+        "promos" : Promotion.objects.all()
     }
     return render(request, "products.html", product_list)
 
@@ -67,10 +79,15 @@ def addProductsAuto(request):
 # Returns the products' view
 def removeDB(request):
     models.Produit.objects.all().delete()
+    models.Promotion.objects.all().delete()
     product_list = {
-        "data" : Produit.objects.all()
+        "data" : Produit.objects.all(),
+        "promos" : Promotion.objects.all()
     }
     return render(request, "products.html", product_list)
+
+def goToProduct(request):
+    return render(request, "product.html")
 
 
 ############################################################ END PRODUCTS ############################################################
@@ -90,9 +107,10 @@ def connect(request):
         'lastName' : password
     }
     body = json.dumps(body)
-    # signup = api.post_request("crm", "/api/update_db", body)
+    signup = api.post_request("crm", "/api/update_db", body)
     product_list = {
-        "data" : Produit.objects.all()
+        "data" : Produit.objects.all(),
+        "promos" : Promotion.objects.all()
     }
     return render(request, 'products.html', product_list)
 
@@ -127,8 +145,8 @@ def loadCustomersAuto(request):
     customers = api.send_request("crm", "api/data")
     data = json.loads(customers)
     for customer in data:
-        customer_tmp = Customer(firstName=customer['firstName'], lastName=customer['lastName'],
-                        fidelityPoint=customer['fidelityPoint'], payment=customer['payment'], account=customer["account"])
+        customer_tmp = Customer(IdClient=customer['IdClient'], Prenom=customer['Prenom'],
+                        Nom=customer['Nom'], Credit=customer['Credit'], Paiement=customer["Paiement"], Compte=customer["Compte"], carteFid=customer["carteFid"])
         customer_tmp.save()
     return HttpResponse("Done")
 

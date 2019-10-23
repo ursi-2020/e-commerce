@@ -44,3 +44,5 @@ class Promotion(models.Model):
     quantiteMin = models.PositiveIntegerField()
     packaging = models.PositiveIntegerField()
     prix = models.PositiveIntegerField()
+    prixOriginel = models.PositiveIntegerField()
+    reduction = models.PositiveIntegerField()

@@ -44,7 +44,7 @@
             <h4 style="margin-left: 3%; font-family: 'Raleway', sans-serif; color: #41A1DB">Liste des produits</h4>
             <p style="margin-left: 3%; font-family: 'Raleway', sans-serif;">Cette page affiche les produits disponibles
                 dans
-                la BDD E-commerce</p>
+                la BDD E-commerce, ainsi que les promotions</p>
         </div>
 
 
@@ -61,6 +61,39 @@
         </div>
         <br>
 
+        <div>
+            <h4 style="margin-left: 3%; font-family: 'Raleway', sans-serif; color: #41A1DB">Liste des promotions</h4>
+        </div>
+
+
+        {% for promo in promos %}
+        <div class="product">
+            <div class="badge">{{ promo.reduction }} %</div>
+            <div class="picture_product"></div>
+            <div>
+                <p><span style="color: gray">Famille produit<br></span> {{ promo.familleProduit }}</p>
+                <!-- <p><u>Description du produit:</u> {{ promo.descriptionProduit }}</p>
+                <p><u>Quantité produit:</u> {{ promo.quantiteMin }}</p>
+                <p><u>Packaging:</u> {{ promo.packaging }}</p> -->
+                <p><span style="color: gray">Prix<br></span><del style="margin-right: 3%">{{ promo.prixOriginel }} € </del>    {{ promo.prix }} €</p>
+                <p><span style="color: gray">Code produit<br></span> {{ promo.codeProduit }}</p>
+                {% if promo.exclusivite == "ecommerce" %}
+                    <p style="color: #41A1DB"><span>Ceci est une exclusivité e-commerce !</span></p>
+                {% else %}
+                    <p style="color: white"><span>x</span></p>
+                {% endif %}
+                <div class="details_banner">
+                    <a  class="details_link" href="product">Voir le produit</a>
+                </div>
+            </div>
+        </div>
+
+        {% endfor %}
+    <br>
+            <div>
+            <h4 style="margin-left: 3%; font-family: 'Raleway', sans-serif; color: #41A1DB">Liste des produits</h4>
+        </div>
+
         {% for product in data %}
         <div class="product">
             <div class="picture_product"></div>
@@ -69,8 +102,16 @@
                 <!-- <p><u>Description du produit:</u> {{ product.descriptionProduit }}</p>
                 <p><u>Quantité produit:</u> {{ product.quantiteMin }}</p>
                 <p><u>Packaging:</u> {{ product.packaging }}</p> -->
-                <p><span style="color: gray">Prix<br></span> {{ product.prix }}</p>
+                <p><span style="color: gray">Prix<br></span> {{ product.prix }} €</p>
                 <p><span style="color: gray">Code produit<br></span> {{ product.codeProduit }}</p>
+                {% if product.exclusivite == "ecommerce" %}
+                    <p style="color: #41A1DB"><span>Ceci est une exclusivité e-commerce !</span></p>
+                {% else %}
+                    <p style="color: white"><span>x</span></p>
+                {% endif %}
+                <div class="details_banner">
+                    <a  class="details_link" href="product">Voir le produit</a>
+                </div>
             </div>
         </div>
 

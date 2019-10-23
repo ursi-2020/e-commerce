@@ -9,6 +9,7 @@ urlpatterns = [
     path('connect', views.connect, name="connect"),
     path('add', views.addProducts, name="add"),
     path('add-auto', views.addProductsAuto, name="add-auto"),
+    path('product', views.goToProduct, name="go-product"),
 
     path('customers', views.displayCustomers, name="customers"),
     path('load_customers', views.loadCustomers, name="load_customers"),

@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" style="background-color: #F9F9F9">
+
+<head>
+    <meta charset="UTF-8">
+    <title>E-commerce</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/products.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <div class="my_navbar">
+
+        <div class="row">
+            <div style="display: inline-block; width: 68%">
+                <h3 class="title" style="margin-left: 4.5%;">E-commerce</h3>
+            </div>
+
+            <div style="display: inline-block">
+                <form method="POST" action="/ecommerce/products" style="text-align: center; display: inline-block;">
+                    {% csrf_token %}
+                    <button class="item_menu" type="submit">Produits</button>
+                </form>
+                <span style="color: gray">|</span>
+                <form method="POST" action="/ecommerce/customers" style="text-align: center; display: inline-block;">
+                    {% csrf_token %}
+                    <button class="item_menu" type="submit">Clients</button>
+                </form>
+                <span style="color: gray">|</span>
+                <form method="POST" action="/ecommerce/scheduler" style="text-align: center; display: inline-block;">
+                    {% csrf_token %}
+                    <button class="item_menu" type="submit">Scheduler</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="picture_product"></div>
+
+</body>
+
+</html>
