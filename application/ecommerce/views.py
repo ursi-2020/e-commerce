@@ -269,3 +269,24 @@ def removeAllTasks(request):
     return HttpResponse("done")
 
 ############################################################ END SCHEDULER ###########################################################
+
+
+
+###########################################################  EXPOSED ROUTES ##########################################################
+
+# Return all tickets
+def getTickets(request):
+    data = {
+        "id" : 1,
+        "total_price" : 60,
+        "products" : [{
+            "id_catalogue" : 1,
+            "codeProduit" : "X1-F0",
+            "familleProduit" : "frigo",
+            "descriptionProduit" : "test produit",
+            "quantity" : 1,
+            "prix" : 4,
+            "exclusivite" : "ecommerce"
+        }]
+    }
+    return JsonResponse(data)

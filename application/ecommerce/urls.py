@@ -18,5 +18,9 @@ urlpatterns = [
 
     path('scheduler', views.displayScheduler, name="scheduler"),
     path('add_task', views.addTaskScheduler, name="add_task"),
-    path('remove_tasks', views.removeAllTasks, name="remove_tasks")
+    path('remove_tasks', views.removeAllTasks, name="remove_tasks"),
+
+    
+
+    path('getTickets', views.getTickets, name="get_tickets")
 ]
