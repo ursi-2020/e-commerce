@@ -3,7 +3,7 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.index, name='index'),
+    # path('', views.index, name='index'),
     path('products', views.displayProducts, name='products'),
     path('remove', views.removeDB, name='remove'),
     path('connect', views.connect, name="connect"),
@@ -21,8 +21,8 @@ urlpatterns = [
     path('remove_tasks', views.removeAllTasks, name="remove_tasks"),
 
 
-    path('create-customer', views.createCustomer, name="create-customer"),
-    path('sales-simulation', views.salesSimulation, name="sales-simulation"),
+    path('create_customer', views.createCustomer, name="create-customer"),
+    path('generate_ecomm_tickets', views.salesSimulation, name="sales-simulation"),
 
 
     path('getTickets', views.getTickets, name="get_tickets")
