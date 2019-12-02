@@ -17,12 +17,13 @@ from datetime import datetime, timedelta
 import json
 import requests
 
+@csrf_exempt
 def createCustomer(request):
     print('ok')
     print(request)
     return HttpResponse("done")
 
-
+@csrf_exempt
 def salesSimulation(request):
     return HttpResponse("done")
 
