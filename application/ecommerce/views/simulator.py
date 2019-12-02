@@ -21,7 +21,9 @@ import requests
 def createCustomer(request):
     print('ok')
     print(request)
-    return HttpResponse("done")
+    return JsonResponse({
+        "carteFid" : "peojfepofj"
+    })
 
 @csrf_exempt
 def salesSimulation(request):
