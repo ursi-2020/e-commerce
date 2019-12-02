@@ -22,7 +22,7 @@ urlpatterns = [
 
 
     path('create_customer', views.createCustomer, name="create-customer"),
-    path('sales-simulation', views.salesSimulation, name="sales-simulation"),
+    path('sales_simulation', views.salesSimulation, name="sales-simulation"),
 
     path('notifier', views.receiveFileNotifier, name="notifier"),
 
