@@ -76,6 +76,20 @@
         </div>
         {% endfor %}
 
+
+        {% for promo in products_promos %}
+        <div class="product">
+            <div class="picture_product"></div>
+            <div>
+                <p><span style="color: gray">Id client<br></span> {{ promo.IdClient }}</p>
+                <p><span style="color: gray">Date<br></span> {{ promo.date }}</p>
+                <p><span style="color: gray">Quantité<br></span> {{ promo.quantity }}</p>
+                <p><span style="color: gray">Reduction<br></span> {{ promo.reduction }}</p>
+                <p><span style="color: gray">Code produit<br></span> {{ promo.codeProduit }}</p>
+            </div>
+        </div>
+        {% endfor %}
+
         {% for promo in promos %}
         <div class="product">
             <div class="badge">{{ promo.reduction }} %</div>

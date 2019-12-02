@@ -9,6 +9,7 @@ from ..models import Customer
 from ..models import Produit
 from ..models import Promotion
 from ..models import ClientPromotion
+from ..models import PromotionsCustomersProducts
 from .. import models
 from datetime import datetime, timedelta
 
@@ -37,7 +38,8 @@ def connect(request):
     product_list = {
         "data" : all_producsts,
         "promos" : all_promotions,
-        "clients_promos" : all_client_promotions
+        "clients_promos" : all_client_promotions,
+        "products_promos" : PromotionsCustomersProducts.objects.all()
     }
     return render(request, 'products.html', product_list)
 

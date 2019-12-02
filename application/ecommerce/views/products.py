@@ -27,11 +27,12 @@ def displayProducts(request):
     for promo in all_promotions:
         promo.prix = promo.prix / 100
         promo.prixOriginel = promo.prixOriginel / 100
-    all_client_promotions = getClientPromotions()
+    all_client_promotions = ClientPromotion.objects.all()
     product_list = {
         "data" : all_producsts,
         "promos" : all_promotions,
-        "clients_promos" : all_client_promotions
+        "clients_promos" : all_client_promotions,
+        "products_promos" : PromotionsCustomersProducts.objects.all()
     }
     return render(request, "products.html", product_list)
 
@@ -42,6 +43,7 @@ def addProducts(request):
     models.Produit.objects.all().delete()
     models.Promotion.objects.all().delete()
     models.ClientPromotion.objects.all().delete()
+    models.PromotionsCustomersProducts.objects.all().delete()
     products = api.send_request("catalogue-produit", "api/get-ecommerce")
     data = json.loads(products)
     for produit in data['produits']:
@@ -57,12 +59,13 @@ def addProducts(request):
         promo.prix = promo.prix / 100
         promo.prixOriginel = promo.prixOriginel / 100
     all_client_promotions = getClientPromotions()
-    # all_products_promotions = getProductPromotions()
+    all_products_promotions = getProductPromotions()
     print("test 1 = " + str(all_client_promotions))
     product_list = {
         "data" : all_producsts,
         "promos" : all_promotions,
-        "clients_promos" : all_client_promotions
+        "clients_promos" : all_client_promotions,
+        "products_promos" : all_products_promotions
     }
     return render(request, "products.html", product_list)
 
@@ -96,10 +99,12 @@ def removeDB(request):
     models.Produit.objects.all().delete()
     models.Promotion.objects.all().delete()
     models.ClientPromotion.objects.all().delete()
+    models.PromotionsCustomersProducts.objects.all().delete()
     product_list = {
         "data" : Produit.objects.all(),
         "promos" : Promotion.objects.all(),
-        "clients_promos" : ClientPromotion.objects.all()
+        "clients_promos" : ClientPromotion.objects.all(),
+        "products_promos" : PromotionsCustomersProducts.objects.all()
     }
     return render(request, "products.html", product_list)
 
