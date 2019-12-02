@@ -11,8 +11,8 @@ class Produit(models.Model):
     prix = models.PositiveIntegerField()
     exclusivite = models.CharField(max_length=200)
 
-    def __str__(self):
-        return "{\"codeProduit\":{}, \"familleProduit\":{}, \"descriptionProduit\":{},\"quantiteMin\":{}, \"packaging\":{}, \"prix\":{}}".format(self.codeProduit, self.familleProduit, self.descriptionProduit, self.quantiteMin, self.packaging, self.prix)
+    # def __str__(self):
+    #     return "{\"codeProduit\":{}, \"familleProduit\":{}, \"descriptionProduit\":{},\"quantiteMin\":{}, \"packaging\":{}, \"prix\":{}}".format(self.codeProduit, self.familleProduit, self.descriptionProduit, self.quantiteMin, self.packaging, self.prix)
 
 class Article(models.Model):
     nom = models.CharField(max_length=200)

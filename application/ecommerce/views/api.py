@@ -30,14 +30,14 @@ def getTickets(request):
                 "articles": [
                   {
                     "codeProduit": "X1-0",
-                    "prixAvant" : 800,
+                    "prix" : 800,
                     "prixApres": 400,
                     "promo": 50,
                     "quantity": 2
                   },
                   {
                     "codeProduit": "X1-9",
-                    "prixAvant" : 48,
+                    "prix" : 48,
                     "prixApres": 24,
                     "promo": 50,
                     "quantity": 1
@@ -54,7 +54,7 @@ def getTickets(request):
                 "articles": [
                   {
                     "codeProduit": "X1-4",
-                    "prixAvant" : 36,
+                    "prix" : 36,
                     "prixApres": 18,
                     "promo": 50,
                     "quantity": 2

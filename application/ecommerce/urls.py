@@ -22,9 +22,11 @@ urlpatterns = [
 
 
     path('create_customer', views.createCustomer, name="create-customer"),
-    path('generate_ecomm_tickets', views.salesSimulation, name="sales-simulation"),
+    path('sales-simulation', views.salesSimulation, name="sales-simulation"),
 
     path('notifier', views.receiveFileNotifier, name="notifier"),
+
+    path('sales', views.salesSimulation, name="sales"),
 
     path('getTickets', views.getTickets, name="get_tickets")
 ]
