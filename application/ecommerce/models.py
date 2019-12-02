@@ -47,3 +47,9 @@ class Promotion(models.Model):
     prix = models.PositiveIntegerField()
     prixOriginel = models.PositiveIntegerField()
     reduction = models.PositiveIntegerField()
+
+
+class ClientPromotion(models.Model):
+    IdClient = models.CharField(max_length=200)
+    date = models.CharField(max_length=200)
+    reduction = models.PositiveIntegerField()
