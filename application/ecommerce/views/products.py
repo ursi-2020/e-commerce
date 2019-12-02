@@ -9,6 +9,7 @@ from django.http import JsonResponse
 from ..models import Produit
 from ..models import Promotion
 from ..models import ClientPromotion
+from ..models import PromotionsCustomersProducts
 from .. import models
 from datetime import datetime, timedelta
 
@@ -26,9 +27,11 @@ def displayProducts(request):
     for promo in all_promotions:
         promo.prix = promo.prix / 100
         promo.prixOriginel = promo.prixOriginel / 100
+    all_client_promotions = getClientPromotions()
     product_list = {
         "data" : all_producsts,
-        "promos" : all_promotions
+        "promos" : all_promotions,
+        "clients_promos" : all_client_promotions
     }
     return render(request, "products.html", product_list)
 
@@ -37,6 +40,8 @@ def displayProducts(request):
 # Returns products' view with content of E-commerce DB
 def addProducts(request):
     models.Produit.objects.all().delete()
+    models.Promotion.objects.all().delete()
+    models.ClientPromotion.objects.all().delete()
     products = api.send_request("catalogue-produit", "api/get-ecommerce")
     data = json.loads(products)
     for produit in data['produits']:
@@ -52,10 +57,12 @@ def addProducts(request):
         promo.prix = promo.prix / 100
         promo.prixOriginel = promo.prixOriginel / 100
     all_client_promotions = getClientPromotions()
-    print(all_client_promotions)
+    # all_products_promotions = getProductPromotions()
+    print("test 1 = " + str(all_client_promotions))
     product_list = {
         "data" : all_producsts,
         "promos" : all_promotions,
+        "clients_promos" : all_client_promotions
     }
     return render(request, "products.html", product_list)
 
@@ -88,9 +95,11 @@ def addProductsAuto(request):
 def removeDB(request):
     models.Produit.objects.all().delete()
     models.Promotion.objects.all().delete()
+    models.ClientPromotion.objects.all().delete()
     product_list = {
         "data" : Produit.objects.all(),
-        "promos" : Promotion.objects.all()
+        "promos" : Promotion.objects.all(),
+        "clients_promos" : ClientPromotion.objects.all()
     }
     return render(request, "products.html", product_list)
 
@@ -123,13 +132,25 @@ def getPromotions():
 def getClientPromotions():
     promotions = api.send_request("gestion-promotion", "promo/customers")
     result = json.loads(promotions)
-    print(result)
     result = result['promo']
     for promo in result:
         p2 = ClientPromotion(IdClient=promo['IdClient'], date=promo['date'],
                         reduction=promo['reduction'])
         p2.save()
     return ClientPromotion.objects.all()
+
+
+# Returns pormotions for products
+def getProductPromotions():
+    promotions = api.send_request("gestion-promotion", "promo/customersproducts")
+    
+    result = json.loads(promotions)
+    result = result['promo']
+    for promo in result:
+        p2 = PromotionsCustomersProducts(IdClient=promo['IdClient'], date=promo['date'],
+                        reduction=promo['reduction'], codeProduit=promo['codeProduit'], quantity=promo['quantity'])
+        p2.save()
+    return PromotionsCustomersProducts.objects.all()
 
 
 # Register functions

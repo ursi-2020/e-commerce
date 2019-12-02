@@ -53,3 +53,10 @@ class ClientPromotion(models.Model):
     IdClient = models.CharField(max_length=200)
     date = models.CharField(max_length=200)
     reduction = models.PositiveIntegerField()
+
+class PromotionsCustomersProducts(models.Model):
+    date = models.DateField()
+    IdClient = models.TextField(blank=False)
+    codeProduit = models.CharField(max_length=20)
+    quantity = models.IntegerField(default = 0)
+    reduction = models.IntegerField(default = 0)

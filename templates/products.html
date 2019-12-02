@@ -65,6 +65,16 @@
             <h4 style="margin-left: 3%; font-family: 'Raleway', sans-serif; color: #41A1DB">Liste des promotions</h4>
         </div>
 
+        {% for promo in clients_promos %}
+        <div class="product">
+            <div class="picture_product"></div>
+            <div>
+                <p><span style="color: gray">Id client<br></span> {{ promo.IdClient }}</p>
+                <p><span style="color: gray">Date<br></span> {{ promo.date }}</p>
+                <p><span style="color: gray">Reduction<br></span> {{ promo.reduction }}</p>
+            </div>
+        </div>
+        {% endfor %}
 
         {% for promo in promos %}
         <div class="product">

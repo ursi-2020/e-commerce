@@ -8,6 +8,7 @@ from django.http import JsonResponse
 from ..models import Customer
 from ..models import Produit
 from ..models import Promotion
+from ..models import ClientPromotion
 from .. import models
 from datetime import datetime, timedelta
 
@@ -29,12 +30,14 @@ def connect(request):
     for product in all_producsts:
         product.prix = product.prix / 100
     all_promotions = Promotion.objects.all()
+    all_client_promotions = ClientPromotion.objects.all()
     for promo in all_promotions:
         promo.prix = promo.prix / 100
         promo.prixOriginel = promo.prixOriginel / 100
     product_list = {
         "data" : all_producsts,
-        "promos" : all_promotions
+        "promos" : all_promotions,
+        "clients_promos" : all_client_promotions
     }
     return render(request, 'products.html', product_list)
 
@@ -83,3 +86,14 @@ def removeCustomers(request):
         "data" : Customer.objects.all()
     }
     return render(request, "customers.html", customers_list)
+
+# Get promotions
+def getClientPromotions():
+    promotions = api.send_request("gestion-promotion", "promo/customers")
+    result = json.loads(promotions)
+    result = result['promo']
+    for promo in result:
+        p2 = ClientPromotion(IdClient=promo['IdClient'], date=promo['date'],
+                        reduction=promo['reduction'])
+        p2.save()
+    return ClientPromotion.objects.all()
