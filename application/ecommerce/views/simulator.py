@@ -19,47 +19,49 @@ import requests
 
 @csrf_exempt
 def createCustomer(request):
-    print("inside create customer")
-    body_unicode = request.body.decode('latin-1')
-    body = json.loads(body_unicode)
-    print(body)
-    print(body["Nom"])
-    nom = body["Nom"]
-    print(body["Prenom"])
-    print(body["email"])
-    print(body["Credit"])
-    print(body["Paiement"])
+    # body_unicode = request.body.decode('latin-1')
+    # body = json.loads(body_unicode)
+    # print(body)
+    # print(body["Nom"])
+    # nom = body["Nom"]
+    # print(body["Prenom"])
+    # print(body["email"])
+    # print(body["Credit"])
+    # print(body["Paiement"])
+
     # generated_body = {
 
     # }
-    if "Compte" in body :
-        generated_body = {
-            "Nom" : nom,
-            "Prenom" : body["Prenom"],
-            "email" : body["email"],
-            "Credit" : body["Credit"],
-            "Paiement" : body["Paiement"],
-            "Compte" : body["Compte"]
-        }
-    else :
-        generated_body = {
-            "Nom" : nom,
-            "Prenom" : body["Prenom"],
-            "email" : body["email"],
-            "Credit" : (body["Credit"]),
-            "Paiement" : body["Paiement"],
-            "Compte" : ""
-        }
+    # if "Compte" in body :
+    #     generated_body = {
+    #         "Nom" : nom,
+    #         "Prenom" : body["Prenom"],
+    #         "email" : body["email"],
+    #         "Credit" : body["Credit"],
+    #         "Paiement" : body["Paiement"],
+    #         "Compte" : body["Compte"]
+    #     }
+    # else :
+    #     generated_body = {
+    #         "Nom" : nom,
+    #         "Prenom" : body["Prenom"],
+    #         "email" : body["email"],
+    #         "Credit" : (body["Credit"]),
+    #         "Paiement" : body["Paiement"],
+    #         "Compte" : ""
+    #     }
     
 
 
-    print(generated_body)
+    # print(generated_body)
     
-    generated_body = json.dumps(generated_body)
-    generated_body = json.loads(generated_body)
-    signup = api.post_request("crm", "/api/create_customer", generated_body)
+    # generated_body = json.dumps(generated_body)
+    # generated_body = json.loads(generated_body)
+    # signup = api.post_request("crm", "/api/create_customer", generated_body)
+
+
     # info = json.loads(signup)
-    print(signup)
+    # print(signup)
 
     # return JsonResponse({
     #     "CarteFid" : info["idClient"]
