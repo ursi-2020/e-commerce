@@ -168,6 +168,7 @@ def register(request):
 # Call this function when file is upload
 @csrf_exempt
 def receiveFileNotifier(request):
+    print('ok je suis dans le notifier')
     r2 = requests.post('http://127.0.0.1:5001/manage')
 
     path_to_json = 'received_files/'

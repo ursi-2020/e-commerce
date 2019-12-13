@@ -19,14 +19,14 @@ import requests
 # Add user to CRM and then connect
 # Returns products' view with current products in E-commerce DB
 def connect(request):
-    username = request.POST.get('username')
-    password = request.POST.get('password')
-    body = {
-        'firstName' : username,
-        'lastName' : password
-    }
-    body = json.dumps(body)
-    signup = api.post_request("crm", "/api/update_db", body)
+    # username = request.POST.get('username')
+    # password = request.POST.get('password')
+    # body = {
+    #     'firstName' : username,
+    #     'lastName' : password
+    # }
+    # body = json.dumps(body)
+    # signup = api.post_request("crm", "/api/update_db", body)
     all_producsts = Produit.objects.all()
     for product in all_producsts:
         product.prix = product.prix / 100
