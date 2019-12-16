@@ -23,10 +23,12 @@ from .simulator import *
 
 def index(request):
    #time = api.send_request('scheduler', 'clock/time')
-   #return HttpResponse("L'heure de la clock est %r" % time)
+   # return HttpResponse("L'heure de la clock est %r" % time)
    r = requests.post('http://127.0.0.1:5001/register', data={'app': 'ecommerce',
                                                               'path': '/mnt/technical_base/e-commerce/received_files',
                                                               'route': 'http://127.0.0.1:9020/notifier'})
 
    # r = requests.post('http://127.0.0.1:5001/unregister', data={'app': 'ecommerce'})
+
+   print(r.text)
    return render(request, 'index.html')
