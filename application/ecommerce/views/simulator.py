@@ -307,7 +307,7 @@ def testSales(data):
     new_sale["prix"] = total_panier
 
     if total_panier != 0:
-        all_tickets.append(new_sale)
+        all_tickets = new_sale
         return_tickets.append(new_sale)
                         
         # print(return_tickets)
@@ -364,4 +364,7 @@ def calculatePrice(product, quantity, client):
 
 
 def getTickets(request):
-    return JsonResponse(all_tickets, safe=False)
+    return_response = {
+        "tickets" : all_tickets
+    }
+    return JsonResponse(return_response, safe=False)
