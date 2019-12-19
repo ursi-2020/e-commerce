@@ -307,7 +307,7 @@ def testSales(data):
     new_sale["prix"] = total_panier
 
     if total_panier != 0:
-        all_tickets = new_sale
+        all_tickets.append(new_sale)
         return_tickets.append(new_sale)
                         
         # print(return_tickets)
@@ -323,7 +323,6 @@ def testSales(data):
         generated_body = json.dumps(generated_body)
         generated_body = json.loads(generated_body)
         status, response = api.post_request2("gestion-paiement", "/api/proceed-payement", generated_body)
-
 
     return HttpResponse("done")
 
