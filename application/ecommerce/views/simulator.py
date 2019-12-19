@@ -275,8 +275,9 @@ def testSales(data):
     # Retrieve products
     products = Produit.objects.all()
 
-    
-    date = datetime.ctime(datetime.now())
+    clock_time = api.send_request('scheduler', 'clock/time')
+    time = datetime.strptime(clock_time, '"%d/%m/%Y-%H:%M:%S"')
+    date = time
 
     # Variable declaration
     new_sale = {
@@ -291,8 +292,8 @@ def testSales(data):
     }
 
     card = ""
-    if "carteFid" in ticket :
-        new_sale["client"] = ticket["carteFid"]
+    if "user" in ticket :
+        new_sale["client"] = ticket["user"]
     if ticket["modePaiement"] == "CARD":
         card = ticket["card"]
 
@@ -310,7 +311,7 @@ def testSales(data):
         all_tickets.append(new_sale)
         return_tickets.append(new_sale)
                         
-        # print(return_tickets)
+        # #print(return_tickets)
 
 
         generated_body = {
