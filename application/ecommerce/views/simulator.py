@@ -127,7 +127,6 @@ def testSales(data):
     if total_panier != 0:
         return_tickets.append(new_sale)
                         
-        # #print(return_tickets)
 
 
         generated_body = {
@@ -183,7 +182,6 @@ def getTickets(request):
     tickets = Tickets.objects.all()
     tickets_returned = []
     for ticket in tickets:
-        print(ticket.articles)
         t1 = {
             "date" : ticket.date,
             "prix" : ticket.prix,

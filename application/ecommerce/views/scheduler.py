@@ -65,8 +65,6 @@ def schedule_task(host, url, time, recurrence, data, source, name):
     headers = {'Host': 'scheduler'}
     data = {"target_url": url, "target_app": host, "time": time_str, "recurrence": recurrence, "data": data, "source_app": source, "name": name}
     r = requests.post(api.api_services_url + 'schedule/add', headers = headers, json = data)
-    print(r.status_code)
-    print(r.text)
     return r.text
 
 
