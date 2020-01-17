@@ -11,14 +11,17 @@ from ..models import Customer
 from ..models import Promotion
 from ..models import ClientPromotion
 from ..models import PromotionsCustomersProducts
+from ..models import Tickets
+from ..models import VenteTicket
 from .. import models
 from datetime import datetime, timedelta
+from django.core import serializers
+
 
 
 import json
 import requests
 
-all_tickets = []
 
 @csrf_exempt
 def createCustomer(request):
@@ -66,205 +69,9 @@ def salesSimulation(request):
 
 
 def testSales(data):
-    # data = {
-    #     "success": "true",
-    #     "result": "ok, 17 tickets generated",
-    #     "tickets": [
-    #         {
-    #             "caisse": "3",
-    #             "panier": [
-    #                 {
-    #                     "codeProduit": "X1-0",
-    #                     "description": "Livre:P2-43",
-    #                     "quantity": 1
-    #                 }
-    #             ],
-    #             "modePaiement": "CARD",
-	#             "card":"BKN1CST18" 
-    #         },
-    #         {
-    #             "caisse": "1",
-    #             "panier": [
-    #                 {
-    #                     "codeProduit": "X1-3",
-    #                     "description": "TV:P2-48",
-    #                     "quantity": 1
-    #                 },
-    #                 {
-    #                     "codeProduit": "X1-1",
-    #                     "description": "TV:P1-13",
-    #                     "quantity": 2
-    #                 },
-    #                 {
-    #                     "codeProduit": "X1-10",
-    #                     "description": "Livre:P2-39",
-    #                     "quantity": 1
-    #                 }
-    #             ],
-    #             "modePaiement": "CASH"
-    #         },
-    #         {
-    #             "caisse": "2",
-    #             "panier": [
-    #                 {
-    #                     "codeProduit": "X1-0",
-    #                     "description": "Frigos:P1-18",
-    #                     "quantity": 1
-    #                 },
-    #                 {
-    #                     "codeProduit": "X1-10",
-    #                     "description": "Console:P2-46",
-    #                     "quantity": 2
-    #                 },
-    #                 {
-    #                     "codeProduit": "X1-8",
-    #                     "description": "Console:P2-14",
-    #                     "quantity": 2
-    #                 }
-    #             ],
-    #             "carteFid": "259a3a6c-1296-11ea-b6f4-08002751d198",
-    #             "modePaiement": "CARD",
-    #             "card": "BKN1CST17"
-    #         },
-    #         {
-    #             "caisse": "4",
-    #             "panier": [
-    #                 {
-    #                     "codeProduit": "X1-8",
-    #                     "description": "Console:P3-24",
-    #                     "quantity": 1
-    #                 },
-    #                 {
-    #                     "codeProduit": "X1-10",
-    #                     "description": "DVD:P2-34",
-    #                     "quantity": 1
-    #                 },
-    #                 {
-    #                     "codeProduit": "X1-3",
-    #                     "description": "Console:P2-27",
-    #                     "quantity": 1
-    #                 },
-    #                 {
-    #                     "codeProduit": "X1-0",
-    #                     "description": "DVD:P2-12",
-    #                     "quantity": 1
-    #                 }
-    #             ],
-    #             "modePaiement": "CASH"
-    #         },
-    #         {
-    #             "caisse": "2",
-    #             "panier": [
-    #                 {
-    #                     "codeProduit": "X1-0",
-    #                     "description": "Frigos:P1-18",
-    #                     "quantity": 1
-    #                 },
-    #                 {
-    #                     "codeProduit": "X1-1",
-    #                     "description": "Console:P2-46",
-    #                     "quantity": 1
-    #                 },
-    #                 {
-    #                     "codeProduit": "X1-3",
-    #                     "description": "Console:P2-14",
-    #                     "quantity": 1
-    #                 }
-    #             ],
-    #             "carteFid": "259ab73a-1296-11ea-b6f4-08002751d198",
-    #             "modePaiement": "CARD",
-    #             "card": "BKN1CST17"
-    #         },
-    #         {
-    #             "caisse": "2",
-    #             "panier": [
-    #                 {
-    #                     "codeProduit": "X1-0",
-    #                     "description": "Frigos:P1-18",
-    #                     "quantity": 2
-    #                 },
-    #                 {
-    #                     "codeProduit": "X1-1",
-    #                     "description": "Console:P2-46",
-    #                     "quantity": 1
-    #                 },
-    #                 {
-    #                     "codeProduit": "X1-8",
-    #                     "description": "Console:P2-14",
-    #                     "quantity": 2
-    #                 }
-    #             ],
-    #             "carteFid": "259b09ba-1296-11ea-b6f4-08002751d198",
-    #             "modePaiement": "CARD",
-    #             "card": "BKN1CST17"
-    #         },
-    #         {
-    #             "caisse": "2",
-    #             "panier": [
-    #                 {
-    #                     "codeProduit": "X1-0",
-    #                     "description": "Frigos:P1-18",
-    #                     "quantity": 3
-    #                 },
-    #                 {
-    #                     "codeProduit": "X1-10",
-    #                     "description": "Console:P2-46",
-    #                     "quantity": 1
-    #                 },
-    #                 {
-    #                     "codeProduit": "X1-3",
-    #                     "description": "Console:P2-14",
-    #                     "quantity": 1
-    #                 }
-    #             ],
-    #             "carteFid": "259ab73a-1296-11ea-b6f4-08002751d198",
-    #             "modePaiement": "CARD",
-    #             "card": "BKN1CST17"
-    #         },
-    #         {
-    #             "caisse": "2",
-    #             "panier": [
-    #                 {
-    #                     "codeProduit": "X1-0",
-    #                     "description": "Frigos:P1-18",
-    #                     "quantity": 4
-    #                 },
-    #                 {
-    #                     "codeProduit": "X1-10",
-    #                     "description": "Console:P2-46",
-    #                     "quantity": 2
-    #                 },
-    #                 {
-    #                     "codeProduit": "X1-8",
-    #                     "description": "Console:P2-14",
-    #                     "quantity": 2
-    #                 }
-    #             ],
-    #             "carteFid": "259a3a6c-1296-11ea-b6f4-08002751d198",
-    #             "modePaiement": "CARD",
-    #             "card": "BKN1CST17"
-    #         }
-    #     ]
-    # }
-    # tickets_to_send = [{
-    #     "id": 42,
-    #     "date": "2019-10-09T17:01:29.408701Z",
-    #     "prix": 424,
-    #     "client": "a14e39ce-e29e-11e9-a8cb-08002751d198",
-    #     "pointsFidelite": 0,
-    #     "modePaiement": "CASH",
-    #     "articles": [
-    #         {
-    #             "codeProduit": "X1-0",
-    #             "prix" : 800,
-    #             "prixApres": 400,
-    #             "promo": 50,
-    #             "quantity": 2
-    #         }
-    #     ]
-    # }]
-
     return_tickets = []
+
+    all_articles_calculated = []
 
     data = json.dumps(data)
     data = json.loads(data)
@@ -301,14 +108,23 @@ def testSales(data):
     for product_panier in ticket["panier"]:
         for product in products:
             # COMMENTER LE IF POUR PAS CHECK SI ON A LE PRODUIT
-            if product_panier["codeProduit"] == product.codeProduit:
-                new_created_product = calculatePrice(product, product_panier["quantity"], new_sale["client"])
-                total_panier += (new_created_product["prixApres"]) * product_panier["quantity"]
-                new_sale["articles"].append(new_created_product)
+            # if product_panier["codeProduit"] == product.codeProduit:
+            new_created_product = calculatePrice(product, product_panier["quantity"], new_sale["client"])
+            all_articles_calculated.append(new_created_product)
+            total_panier += (new_created_product["prixApres"]) * product_panier["quantity"]
+            new_sale["articles"].append(new_created_product)
     new_sale["prix"] = total_panier
 
+    t1 = Tickets(date=new_sale["date"], prix=new_sale["prix"], client=new_sale["client"], pointsFidelite=new_sale["pointsFidelite"], modePaiement=new_sale["modePaiement"])
+    t1.save()
+
+    for article in all_articles_calculated:
+        a1 = VenteTicket(codeProduit=article["codeProduit"], prix=article["prix"], prixApres=article["prixApres"], promo=article["promo"], promo_client=article["promo_client"], promo_client_produit=article["promo_client_produit"], quantity=article["quantity"])
+        a1.save()
+        t1.articles.add(a1)
+    
+
     if total_panier != 0:
-        all_tickets.append(new_sale)
         return_tickets.append(new_sale)
                         
         # #print(return_tickets)
@@ -364,7 +180,21 @@ def calculatePrice(product, quantity, client):
 
 
 def getTickets(request):
+    tickets = Tickets.objects.all()
+    tickets_returned = []
+    for ticket in tickets:
+        print(ticket.articles)
+        t1 = {
+            "date" : ticket.date,
+            "prix" : ticket.prix,
+            "client" : ticket.client,
+            "pointsFidelite" : ticket.pointsFidelite,
+            "modePaiement" : ticket.modePaiement,
+            "articles" : ""
+        }
+
     return_response = {
-        "tickets" : all_tickets
+        "tickets" : []
     }
+    
     return JsonResponse(return_response, safe=False)

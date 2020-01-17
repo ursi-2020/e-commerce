@@ -1,4 +1,6 @@
 from django.db import models
+from django.contrib.postgres.fields import ArrayField
+
 
 
 class Produit(models.Model):
@@ -60,3 +62,23 @@ class PromotionsCustomersProducts(models.Model):
     codeProduit = models.CharField(max_length=20)
     quantity = models.IntegerField(default = 0)
     reduction = models.IntegerField(default = 0)
+
+class VenteTicket(models.Model):
+    codeProduit = models.TextField(blank=False)
+    prix = models.PositiveIntegerField()
+    prixApres = models.PositiveIntegerField()
+    promo = models.IntegerField()
+    promo_client = models.IntegerField()
+    promo_client_produit = models.IntegerField()
+    quantity = models.PositiveIntegerField()
+
+class Tickets(models.Model):
+    date = models.DateField()
+    prix = models.PositiveIntegerField()
+    client = models.TextField(blank=False)
+    pointsFidelite = models.PositiveIntegerField()
+    modePaiement = models.TextField()
+    articles = models.ManyToManyField(VenteTicket,
+                                     related_name='articles')
+
+
