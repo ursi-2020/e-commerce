@@ -12,7 +12,6 @@ from ..models import Promotion
 from ..models import ClientPromotion
 from ..models import PromotionsCustomersProducts
 from ..models import Tickets
-from ..models import VenteTicket
 from .. import models
 from datetime import datetime, timedelta
 from django.core import serializers
@@ -108,26 +107,18 @@ def testSales(data):
     for product_panier in ticket["panier"]:
         for product in products:
             # COMMENTER LE IF POUR PAS CHECK SI ON A LE PRODUIT
-            # if product_panier["codeProduit"] == product.codeProduit:
-            new_created_product = calculatePrice(product, product_panier["quantity"], new_sale["client"])
-            all_articles_calculated.append(new_created_product)
-            total_panier += (new_created_product["prixApres"]) * product_panier["quantity"]
-            new_sale["articles"].append(new_created_product)
+            if product_panier["codeProduit"] == product.codeProduit:
+                new_created_product = calculatePrice(product, product_panier["quantity"], new_sale["client"])
+                all_articles_calculated.append(new_created_product)
+                total_panier += (new_created_product["prixApres"]) * product_panier["quantity"]
+                new_sale["articles"].append(new_created_product)
     new_sale["prix"] = total_panier
 
-    t1 = Tickets(date=new_sale["date"], prix=new_sale["prix"], client=new_sale["client"], pointsFidelite=new_sale["pointsFidelite"], modePaiement=new_sale["modePaiement"])
+    t1 = Tickets(date=new_sale["date"], prix=new_sale["prix"], client=new_sale["client"], pointsFidelite=new_sale["pointsFidelite"], modePaiement=new_sale["modePaiement"], articles=json.dumps(all_articles_calculated))
     t1.save()
-
-    for article in all_articles_calculated:
-        a1 = VenteTicket(codeProduit=article["codeProduit"], prix=article["prix"], prixApres=article["prixApres"], promo=article["promo"], promo_client=article["promo_client"], promo_client_produit=article["promo_client_produit"], quantity=article["quantity"])
-        a1.save()
-        t1.articles.add(a1)
-    
 
     if total_panier != 0:
         return_tickets.append(new_sale)
-                        
-
 
         generated_body = {
             "client_id" : new_sale["client"],
@@ -188,11 +179,11 @@ def getTickets(request):
             "client" : ticket.client,
             "pointsFidelite" : ticket.pointsFidelite,
             "modePaiement" : ticket.modePaiement,
-            "articles" : ""
+            "articles" : json.loads(ticket.articles)
         }
 
     return_response = {
-        "tickets" : []
+        "tickets" : tickets_returned
     }
     
     return JsonResponse(return_response, safe=False)

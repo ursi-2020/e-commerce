@@ -60,7 +60,6 @@ def addProducts(request):
         promo.prixOriginel = promo.prixOriginel / 100
     all_client_promotions = getClientPromotions()
     all_products_promotions = getProductPromotions()
-    print("test 1 = " + str(all_client_promotions))
     product_list = {
         "data" : all_producsts,
         "promos" : all_promotions,
@@ -73,7 +72,6 @@ def addProducts(request):
 # Call Catalogue produits to get content of its DB automatically
 @csrf_exempt
 def addProductsAuto(request):
-    print("Added automatically products")
     products = api.send_request("catalogue-produit", "api/get-ecommerce")
     data = json.loads(products)
     for produit in data['produits']:
@@ -168,14 +166,12 @@ def register(request):
 # Call this function when file is upload
 @csrf_exempt
 def receiveFileNotifier(request):
-    print('ok je suis dans le notifier')
     r2 = requests.post('http://127.0.0.1:5001/manage')
 
     path_to_json = 'received_files/'
     json_files = [pos_json for pos_json in os.listdir(path_to_json) if pos_json.endswith('.json')]
     for _file in json_files:
         models.Produit.objects.all().delete()
-        print("received_files/" + _file)
         if (_file != "catalogue2.json"):
             json_data = open('received_files/' + _file)
             products = json.loads(json_data.read())

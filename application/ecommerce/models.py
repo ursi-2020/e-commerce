@@ -63,22 +63,12 @@ class PromotionsCustomersProducts(models.Model):
     quantity = models.IntegerField(default = 0)
     reduction = models.IntegerField(default = 0)
 
-class VenteTicket(models.Model):
-    codeProduit = models.TextField(blank=False)
-    prix = models.PositiveIntegerField()
-    prixApres = models.PositiveIntegerField()
-    promo = models.IntegerField()
-    promo_client = models.IntegerField()
-    promo_client_produit = models.IntegerField()
-    quantity = models.PositiveIntegerField()
-
 class Tickets(models.Model):
     date = models.DateField()
     prix = models.PositiveIntegerField()
     client = models.TextField(blank=False)
     pointsFidelite = models.PositiveIntegerField()
     modePaiement = models.TextField()
-    articles = models.ManyToManyField(VenteTicket,
-                                     related_name='articles')
+    articles = models.TextField(blank=False)
 
 
