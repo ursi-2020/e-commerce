@@ -181,6 +181,7 @@ def getTickets(request):
             "modePaiement" : ticket.modePaiement,
             "articles" : json.loads(ticket.articles)
         }
+        tickets_returned.append(t1)
 
     return_response = {
         "tickets" : tickets_returned
