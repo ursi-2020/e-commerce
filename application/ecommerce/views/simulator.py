@@ -174,6 +174,7 @@ def getTickets(request):
     tickets_returned = []
     for ticket in tickets:
         t1 = {
+            "id" : ticket.id,
             "date" : ticket.date,
             "prix" : ticket.prix,
             "client" : ticket.client,
