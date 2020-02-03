@@ -59,7 +59,7 @@ def loadCustomers(request):
     data = json.loads(customers)
     for customer in data:
         customer_tmp = Customer(IdClient=customer['IdClient'], Prenom=customer['Prenom'],
-                        Nom=customer['Nom'], Credit=customer['Credit'], Paiement=customer["Paiement"], Compte=customer["Compte"], carteFid=customer["carteFid"])
+                        Nom=customer['Nom'], Credit=customer['Credit'], Paiement=customer["Montant"], Compte=customer["Compte"])
         customer_tmp.save()
     customers_list = {
         "data" : Customer.objects.all()
@@ -75,7 +75,7 @@ def loadCustomersAuto(request):
     data = json.loads(customers)
     for customer in data:
         customer_tmp = Customer(IdClient=customer['IdClient'], Prenom=customer['Prenom'],
-                        Nom=customer['Nom'], Credit=customer['Credit'], Paiement=customer["Paiement"], Compte=customer["Compte"], carteFid=customer["carteFid"])
+                        Nom=customer['Nom'], Credit=customer['Credit'], Paiement=customer["Montant"], Compte=customer["Compte"])
         customer_tmp.save()
     return HttpResponse("Done")
 

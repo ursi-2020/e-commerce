@@ -64,7 +64,7 @@ class PromotionsCustomersProducts(models.Model):
     reduction = models.IntegerField(default = 0)
 
 class Tickets(models.Model):
-    date = models.DateField()
+    date = models.DateTimeField()
     prix = models.PositiveIntegerField()
     client = models.TextField(blank=False)
     pointsFidelite = models.PositiveIntegerField()
