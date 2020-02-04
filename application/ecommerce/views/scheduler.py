@@ -30,23 +30,25 @@ def displayScheduler(request):
 
 
 # Add a task to scheduler using the form
-def addTaskScheduler(request):
-    data = request.POST.dict()
-    time = datetime.strptime(data["time"], '%Y-%m-%dT%H:%M')
+def addTaskScheduler():
+    
+    today = api.send_request('scheduler', 'clock/time')
+    time = datetime.strptime(today, '"%d/%m/%Y-%H:%M:%S"')
+
     host = ""
-    recurrence = data["recurrence"]
+    recurrence = "day"
     url = ""
     source = "e-commerce"
     name = "get_customers"
     data2 = ""
-    if data["app"] == "products":
-        host = "e-commerce"
-        url = "ecommerce/add-auto"
-        name = "get_products"
-    elif data["app"] == "crm":
-        host = "e-commerce"
-        url = "ecommerce/auto_load_customers"
-        name = "get_customers"
+    # if data["app"] == "products":
+    #     host = "e-commerce"
+    #     url = "ecommerce/add-auto"
+    #     name = "get_products"
+    # elif data["app"] == "crm":
+    host = "e-commerce"
+    url = "ecommerce/auto_load_customers"
+    name = "get_customers"
     schedule_task(host, url, time, recurrence, data2, source, name)
 
     info = api.send_request("scheduler", "clock/info")
@@ -56,7 +58,7 @@ def addTaskScheduler(request):
         "data" : info,
         "tasks" : tasks
     }
-    return render(request, "scheduler.html", info)
+    return JsonResponse({"State": "finished"})
 
 
 # Function used to schedule a task
