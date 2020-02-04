@@ -68,7 +68,7 @@ def addTaskSchedulerProduct():
     time = datetime.strptime(today, '"%d/%m/%Y-%H:%M:%S"')
 
     host = ""
-    recurrence = "minute"
+    recurrence = "day"
     url = ""
     source = "e-commerce"
     name = "get_products"
