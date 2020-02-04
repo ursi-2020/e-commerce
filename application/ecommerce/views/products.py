@@ -72,23 +72,28 @@ def addProducts(request):
 # Call Catalogue produits to get content of its DB automatically
 @csrf_exempt
 def addProductsAuto(request):
+    models.Produit.objects.all().delete()
+    models.Promotion.objects.all().delete()
+    models.ClientPromotion.objects.all().delete()
+    models.PromotionsCustomersProducts.objects.all().delete()
     products = api.send_request("catalogue-produit", "api/get-ecommerce")
     data = json.loads(products)
     for produit in data['produits']:
         p = Produit(codeProduit=produit['codeProduit'], familleProduit=produit['familleProduit'],
-                        descriptionProduit=produit['descriptionProduit'], prix=produit['prix'], quantiteMin=1, packaging=0, exclusivite=produit['exclusivite'], id_catalogue=produit['id'])
+                        descriptionProduit=produit['descriptionProduit'], prix=produit['prix'], quantiteMin=1, packaging=0, exclusivite=produit['exclusivite'], id_catalogue=2)
         p.save()
-
     
-    promotions = api.send_request("gestion-promotion", "promo/ecommerce")
-    data2 = json.loads(promotions)
-    data2 = json.loads(data2)
-    for promo in data2:
-        p2 = Promotion(codeProduit=promo['fields']['codeProduit'], familleProduit=promo['fields']['familleProduit'],
-                        descriptionProduit=promo['fields']['descriptionProduit'], prix=promo['fields']['prix'], quantiteMin=promo['fields']['quantiteMin'], packaging=promo['fields']['packaging'], prixOriginel=promo['fields']['prixOriginel'], reduction=promo['fields']['reduction'])
-        p2.save()
+    all_producsts = Produit.objects.all()
+    for product in all_producsts:
+        product.prix = product.prix / 100
+    all_promotions = getPromotions()
+    for promo in all_promotions:
+        promo.prix = promo.prix / 100
+        promo.prixOriginel = promo.prixOriginel / 100
+    all_client_promotions = getClientPromotions()
+    all_products_promotions = getProductPromotions()
 
-    return HttpResponse("Done")
+    return JsonResponse({"status": "ok"})
 
 
 # Remove all products from DB
